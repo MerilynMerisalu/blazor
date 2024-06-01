@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\FirstBlazorApp.Client\Pages\MyButton.razor" Link="Components\MyButton.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FirstBlazorApp.Client\FirstBlazorApp.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.6" />
   </ItemGroup>

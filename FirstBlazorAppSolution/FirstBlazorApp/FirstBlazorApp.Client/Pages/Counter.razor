@@ -1,7 +1,6 @@
 ﻿
 @page "/counter"
 @rendermode InteractiveAuto
-
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
@@ -9,17 +8,51 @@
 <p role="status">Current count: @currentCount</p>
 
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+@* <button class="btn btn-primary" @onclick="() => currentCount+=2">Click me</button> *@
 
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button> 
+<MyButton OnClick="IncrementCount" class="btn btn-success">Happy Button</MyButton>
 
+@* <div class="mt-3">
+    <input @onchange="OnChange" />
+    <p>@text</p>
+</div> *@
+
+<div class="mt-3">
+    <input @oninput="OnInput" />
+    <p>@text</p>
+</div>
+<div style="background-color:lightblue" @onmouseover="MouseOver" @onmouseout="MouseOut">
+    @divText
+</div>
 @code {
 
     private int currentCount = 0;
+    string text = "";
+    string divText = "Mouse out!";
 
 
+    // private void IncrementCount()
+    // {
+    //     currentCount++;
+    // }
 
-    private void IncrementCount()
+    // async Task IncrementCountAsync()
+    // {
+    //     await Task.Delay(1000);
+    //     currentCount++;
+    // }
+    private void IncrementCount(MouseEventArgs e) => currentCount++;
+
+
+    // private void OnChange(ChangeEventArgs e)
+    // {
+    //     text = e.Value!.ToString()!;
+    // }
+    private void OnInput(ChangeEventArgs e) => text = e.Value!.ToString()!;
+    private void MouseOver(MouseEventArgs e) => divText = "Mouse over";
+    private void MouseOut(MouseEventArgs e)
     {
-        currentCount++;
+        divText = "Mouse out!";
     }
 }
