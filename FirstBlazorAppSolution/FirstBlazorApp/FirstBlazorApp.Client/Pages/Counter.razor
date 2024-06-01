@@ -1,58 +1,40 @@
 ﻿
 @page "/counter"
-@rendermode InteractiveAuto
+@rendermode InteractiveServer
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
 <p role="status">Current count: @currentCount</p>
-
-
-@* <button class="btn btn-primary" @onclick="() => currentCount+=2">Click me</button> *@
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button> 
-<MyButton OnClick="IncrementCount" class="btn btn-success">Happy Button</MyButton>
-
-@* <div class="mt-3">
-    <input @onchange="OnChange" />
-    <p>@text</p>
-</div> *@
-
+<button class="btn btn-primary" @onclick="IncrementCount">Click Me!</button>
 <div class="mt-3">
-    <input @oninput="OnInput" />
+    <input @bind="text" @bind:event="oninput" @bind:after="Search"/>
+    <button @onclick="Clear">Clear</button>
     <p>@text</p>
-</div>
-<div style="background-color:lightblue" @onmouseover="MouseOver" @onmouseout="MouseOut">
-    @divText
+    <p>@searchResults</p>
 </div>
 @code {
 
     private int currentCount = 0;
     string text = "";
-    string divText = "Mouse out!";
-
-
-    // private void IncrementCount()
-    // {
-    //     currentCount++;
-    // }
-
-    // async Task IncrementCountAsync()
-    // {
-    //     await Task.Delay(1000);
-    //     currentCount++;
-    // }
+    string searchResults = "";
     private void IncrementCount(MouseEventArgs e) => currentCount++;
 
-
-    // private void OnChange(ChangeEventArgs e)
-    // {
-    //     text = e.Value!.ToString()!;
-    // }
-    private void OnInput(ChangeEventArgs e) => text = e.Value!.ToString()!;
-    private void MouseOver(MouseEventArgs e) => divText = "Mouse over";
-    private void MouseOut(MouseEventArgs e)
+    private void Change(ChangeEventArgs e)
     {
-        divText = "Mouse out!";
+        text = e.Value!.ToString()!;
+    }
+
+    private void Clear(MouseEventArgs e)
+    {
+
+        text = "";
+    }
+
+    private async Task Search()
+    {
+        searchResults = "Searching ...";
+        await Task.Delay(2000);
+        searchResults = $"Found {Random.Shared.Next()} results!";
     }
 }
