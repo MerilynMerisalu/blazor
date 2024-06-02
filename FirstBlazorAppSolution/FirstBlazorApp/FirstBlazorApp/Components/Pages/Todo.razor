@@ -14,6 +14,7 @@
         <li>
             <input type="checkbox" @bind="todo.IsDone" />
             <input type="text" @bind="todo.Title" />
+            <button @onclick="@(e => Delete(e, todo.Id))" class="btn btn-danger">Delete</button>
         </li>
         
     }
@@ -34,12 +35,13 @@
 @code {
     List<TodoItem> TodoItems = new List<TodoItem>();
     string newTodo = string.Empty;
-    
+
     public class TodoItem
     {
+        public int Id { get; set; }
         public string Title { get; set; } = default!;
         public bool IsDone { get; set; }
-        
+
     }
     private void AddTodo(MouseEventArgs e)
     {
@@ -47,9 +49,15 @@
         {
             TodoItems.Add(new TodoItem()
             {
+                Id = Random.Shared.Next(),
                 Title = newTodo
             });
             newTodo = string.Empty;
         }
+    }
+    private void Delete(MouseEventArgs e, int id)
+    {
+        TodoItem todo = TodoItems.Find(t => t.Id == id)!;
+        TodoItems.Remove(todo);
     }
 }
