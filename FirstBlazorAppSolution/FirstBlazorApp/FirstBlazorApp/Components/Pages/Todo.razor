@@ -20,17 +20,26 @@
 </ul>
 <input @bind="newTodo" />
 <div>
-    <p>There is @TodoItems.Count(t => !t.IsDone) undone! </p>
+    @if(TodoItems.Count(t => !t.IsDone) == 1)
+    {
+        <p>There is @TodoItems.Count(t => !t.IsDone) todo undone! </p>
+    }
+    else
+    {
+     <p>There are @TodoItems.Count(t => !t.IsDone) todos undone! </p>
+    }
 </div>
 <button class="btn btn-primary" @onclick="AddTodo">Add Todo</button>
  
 @code {
     List<TodoItem> TodoItems = new List<TodoItem>();
     string newTodo = string.Empty;
+    
     public class TodoItem
     {
         public string Title { get; set; } = default!;
         public bool IsDone { get; set; }
+        
     }
     private void AddTodo(MouseEventArgs e)
     {
