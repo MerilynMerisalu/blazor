@@ -86,8 +86,8 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["ContactTypeId"] = new SelectList(_context.ContactTypes, "ContactTypeId", "ContactTypeName", contact.ContactTypeId);
-            ViewData["PersonId"] = new SelectList(_context.People, "PersonId", "FirstName", contact.PersonId);
+            ViewData["ContactTypeId"] = new SelectList(_context.ContactTypes, nameof(ContactType.ContactTypeId), nameof(ContactType.ContactTypeName), contact.ContactTypeId);
+            ViewData["PersonId"] = new SelectList(_context.People, nameof(Person.PersonId), nameof(Person.FirstAndLastName), contact.PersonId);
             return View(contact);
         }
 
@@ -96,7 +96,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ContactId,PersonId,ContactTypeId,ContactValue")] Contact contact)
+        public async Task<IActionResult> Edit(int id, Contact contact)
         {
             if (id != contact.ContactId)
             {
@@ -123,8 +123,8 @@ namespace WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ContactTypeId"] = new SelectList(_context.ContactTypes, "ContactTypeId", "ContactTypeName", contact.ContactTypeId);
-            ViewData["PersonId"] = new SelectList(_context.People, "PersonId", "FirstName", contact.PersonId);
+            ViewData["ContactTypeId"] = new SelectList(_context.ContactTypes, nameof(ContactType.ContactTypeId), nameof(ContactType.ContactTypeName), contact.ContactTypeId);
+            ViewData["PersonId"] = new SelectList(_context.People, nameof(Person.PersonId), nameof(Person.FirstAndLastName), contact.PersonId);
             return View(contact);
         }
 
