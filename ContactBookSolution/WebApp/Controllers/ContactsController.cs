@@ -49,8 +49,9 @@ namespace WebApp.Controllers
         // GET: Contacts/Create
         public IActionResult Create()
         {
-            ViewData["ContactTypeId"] = new SelectList(_context.ContactTypes, "ContactTypeId", "ContactTypeName");
-            ViewData["PersonId"] = new SelectList(_context.People, "PersonId", "FirstName");
+            ViewData["ContactTypeId"] = new SelectList(_context.ContactTypes, nameof(ContactType.ContactTypeId),nameof(ContactType.ContactTypeName));
+            ViewData["PersonId"] = new SelectList(_context.People, nameof(Person.PersonId),
+                nameof(Person.FirstAndLastName));
             return View();
         }
 
