@@ -1,5 +1,6 @@
 ﻿@page "/people"
 @using ContactBookClient.DTO
+@using ContactBookClient.Services
 @inject PersonService service
 <h3>People</h3>
 <h1>Index</h1>
@@ -26,6 +27,11 @@ else
                 <tr>
                     <td>@person!.FirstName</td>
                     <td>@person.LastName</td>
+                    <td>
+                        <a href="@($"/people/details/{person.PersonId}")">Details</a>
+                        <a href="@($"/people/edit/{person.PersonId}")">Edit</a>
+                        <a href="@($"/people/delete/{person.PersonId}")">Delete</a>
+                    </td>
                 </tr>
             }
             

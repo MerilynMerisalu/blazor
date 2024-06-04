@@ -1,5 +1,6 @@
 using ContactBookClient;
 using ContactBookClient.IService;
+using ContactBookClient.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using static System.Net.WebRequestMethods;
