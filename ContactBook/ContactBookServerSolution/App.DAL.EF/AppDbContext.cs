@@ -10,5 +10,7 @@ namespace App.DAL.EF
         }
 
         public DbSet<Person> People { get; set; } = default!;
+        public DbSet<Contact> Contacts { get; set; } = default!;
+        public DbSet<ContactType> ContactTypes { get; set; } = default!;
     }
 }

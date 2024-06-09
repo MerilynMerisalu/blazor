@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Domain.EF
 {
@@ -15,5 +16,10 @@ namespace App.Domain.EF
         [MaxLength(64)]
         [StringLength(64)]
         public string LastName { get; set; } = default!;
+
+        public string FirstAndLastName => $"{FirstName} {LastName}";
+        public string LastAndFirstName => $"{LastName} {FirstName}";
+
+        public ICollection<Contact> Contacts { get; set; }
     }
 }
