@@ -6,6 +6,7 @@ namespace ContactBookClient.Services
     public interface IPerson
     {
         Task<IEnumerable<Person?>>? GetPeopleAsync();
+        Task<Person?> GetPersonByIdAsync(Guid PersonId);
     }
     public class PersonService : IPerson
     {
@@ -18,8 +19,12 @@ namespace ContactBookClient.Services
 
         public async Task<IEnumerable<Person?>>? GetPeopleAsync()
         {
-            Console.WriteLine(_address);
             return await _client.GetFromJsonAsync<IEnumerable<Person?>>(_address);
+        }
+
+        public async Task<Person?> GetPersonByIdAsync(Guid personId)
+        {
+            return await _client.GetFromJsonAsync<Person?>($"{_address}/{personId}");
         }
     }
 }

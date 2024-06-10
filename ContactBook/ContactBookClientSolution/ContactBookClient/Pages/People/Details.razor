@@ -1,5 +1,15 @@
-﻿<h3>Details</h3>
+﻿@page "/people/details/{id:guid}"
+@using ContactBookClient.Services
+@inject PersonService service
+
+<PageTitle>Person Details</PageTitle>
+
+<h3>Details</h3>
 
 @code {
+
+    [Parameter]
+    public Guid Id { get; set; }
+
 
 }
