@@ -36,9 +36,9 @@ else
                         @p!.LastName
                     </td>
                     <td>
-                       <a href=@($"/people/edit/")>Edit</a> |
+                       <a href=@($"/people/edit/{p.PersonId}")>Edit</a> |
                        <a href=@($"/people/details/{p.PersonId}")>Details</a> |
-                        <a href=@($"/people/delete/{p.PersonId}")>Delete</a>
+                       <a href=@($"/people/delete/{p.PersonId}")>Delete</a>
                     </td>
                 </tr>
             }
