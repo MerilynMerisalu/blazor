@@ -24,7 +24,8 @@ namespace ContactBookClient.Services
 
         public async Task<Person?> GetPersonByIdAsync(Guid personId)
         {
-            return await _client.GetFromJsonAsync<Person?>($"{_address}/{personId}");
+            
+            return await _client.GetFromJsonAsync<Person?>($"{_address}{personId}");
         }
     }
 }

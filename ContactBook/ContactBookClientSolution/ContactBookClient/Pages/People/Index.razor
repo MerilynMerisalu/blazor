@@ -3,7 +3,7 @@
 @using ContactBookClient.Services
 @inject PersonService service
 <PageTitle>People Index</PageTitle>
-<h3>People Index</h3>
+<h1>People Index</h1>
 <p>
     <a href="/people/create">Create New</a>
 </p>
@@ -26,19 +26,19 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in People)
+            @foreach (var p in People)
             {
                 <tr>
                     <td>
-                        @item.FirstName
+                        @p!.FirstName
                     </td>
                     <td>
-                        @item.LastName
+                        @p!.LastName
                     </td>
                     <td>
-                       <a href=@($"/people/edit/{item.PersonId}")>Edit</a> |
-                       <a href=@($"/people/details/{item.PersonId}")>Details</a> |
-                        <a href=@($"/people/delete/{item.PersonId}")>Delete</a>
+                       <a href=@($"/people/edit/")>Edit</a> |
+                       <a href=@($"/people/details/{p.PersonId}")>Details</a> |
+                        <a href=@($"/people/delete/{p.PersonId}")>Delete</a>
                     </td>
                 </tr>
             }

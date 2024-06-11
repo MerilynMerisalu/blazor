@@ -1,15 +1,50 @@
-﻿@page "/people/details/{id:guid}"
+﻿@page "/people/details/{personid:guid}"
+@using ContactBookClient.Entities
 @using ContactBookClient.Services
 @inject PersonService service
 
 <PageTitle>Person Details</PageTitle>
 
-<h3>Details</h3>
+<h1>Details</h1>
+<h4>Person</h4>
+<hr />
+@if(Person == null)
+{
+    <p><i>Loading ...</i></p>
+}
+else
+{
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Person.FirstName
+        </dt>
+        <dd class="col-sm-10">
+            @Person.FirstName
+        </dd>
+        <dt class="col-sm-2">
+            @Person.LastName
+        </dt>
+        <dd class="col-sm-10">
+            @Person.LastName
+        </dd>
+    </dl>
+
+    <div>
+        <a href=@($"/people/edit/")>Edit</a>
+        <a href="/people/index">Back to List</a>
+    </div>
+}
 
 @code {
 
     [Parameter]
-    public Guid Id { get; set; }
+    public Guid PersonId { get; set; }
 
+    Person? Person;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Person = await service.GetPersonByIdAsync(PersonId);
+    }
 
 }
