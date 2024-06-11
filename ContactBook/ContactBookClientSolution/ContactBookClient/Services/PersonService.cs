@@ -5,27 +5,28 @@ namespace ContactBookClient.Services
 {
     public interface IPerson
     {
+        Task DeletePersonByIdAsync(Guid personId);
         Task<IEnumerable<Person?>>? GetPeopleAsync();
-        Task<Person?> GetPersonByIdAsync(Guid PersonId);
+        Task<Person?> GetPersonByIdAsync(Guid personId);
     }
-    public class PersonService : IPerson
+    public class PersonService(HttpClient client) : IPerson
     {
-        private HttpClient _client;
-        private string _address => _client.BaseAddress.ToString() + "people/";
-        public PersonService(HttpClient client)
+        private string _address => client.BaseAddress + "people/";
+
+        public async Task DeletePersonByIdAsync(Guid personId)
         {
-            _client = client;
+            await client.DeleteFromJsonAsync<Person?>($"{_address}{personId}");
         }
 
         public async Task<IEnumerable<Person?>>? GetPeopleAsync()
         {
-            return await _client.GetFromJsonAsync<IEnumerable<Person?>>(_address);
+            return await client.GetFromJsonAsync<IEnumerable<Person?>>(_address);
         }
 
         public async Task<Person?> GetPersonByIdAsync(Guid personId)
         {
             
-            return await _client.GetFromJsonAsync<Person?>($"{_address}{personId}");
+            return await client.GetFromJsonAsync<Person?>($"{_address}{personId}");
         }
     }
 }
