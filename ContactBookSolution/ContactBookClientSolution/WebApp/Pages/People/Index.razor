@@ -3,6 +3,7 @@
 @using Application.Service
 @inject PersonService service
 <h3>Index</h3>
+<a href="/people/create">Create New</a>
 @if(People == null)
 {
     <p><i>Loading ...</i></p>
@@ -22,7 +23,11 @@ else
                 <tr>
                     <td>@p.FirstName</td>
                     <td>@p.LastName</td>
-
+                    <td>
+                        <a href=@($"/people/edit/{p.Id}")>Edit</a> |
+                        <a href=@($"/people/details/{p.Id}")>Details</a> |
+                        <a href=@($"/people/delete/{p.Id}")>Delete</a> 
+                    </td>
                 </tr>
             }
         </tbody>
