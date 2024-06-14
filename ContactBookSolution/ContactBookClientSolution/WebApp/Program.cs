@@ -1,3 +1,4 @@
+using Application.Service;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WebApp;
@@ -8,6 +9,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7189/") });
+builder.Services.AddTransient<PersonService>();
 builder.Services.AddOidcAuthentication(options =>
 {
     // Configure your authentication provider options here.

@@ -7,37 +7,21 @@ using System.Net.Http.Json;
 
 namespace Base.Service
 {
-    public class BaseService<TEntity>
-    where TEntity : class, IDomainEntityId<Guid>
 
+    public abstract class BaseService<TEntity, TKey> : MVCBaseService, IBaseEntityService<TEntity, TKey>
+        where TEntity : class
+        where TKey : IEquatable<TKey>
     {
-        private HttpClient _client; 
-        public BaseService(TEntity entity, HttpClient client)
+        protected BaseService(HttpClient client) : base(client)
         {
-            _client = client;
+        }
+
+        public async Task<IEnumerable<TEntity?>> GetAllAsync()
+        {
+            return await _client.GetFromJsonAsync<IEnumerable<TEntity?>?>(GetEndpointUrl());
         }
     }
-    public class BaseService<TEntity, TKey> :
-    IBaseService<TEntity, TKey>
-    where TEntity : class, IDomainEntityId<TKey>
-    where TKey : IEquatable<TKey>
+}
 
-    {
-        private HttpClient _client;
 
-        public BaseService(HttpClient client)
-        {
-            _client = client;
-        }
 
-        public IEnumerable<TEntity?>? GetAll()
-        {
-            return (IEnumerable<TEntity?>?)_client.GetFromJsonAsync<TEntity?>($"{_client.BaseAddress}"); 
-        }
-
-        public async Task<IEnumerable<TEntity?>>? GetAllAsync()
-        {
-            return (IEnumerable<TEntity?>)await _client.GetFromJsonAsync<TEntity?>($"{_client.BaseAddress}");
-        }
-    }
-    }
