@@ -10,6 +10,8 @@ namespace Application.Service
     public interface IPersonService
     {
         Task<IEnumerable<Person?>?>GetPeopleAsync();
+        Task<Person?>GetPersonByIdAsync(Guid id);
+        Task DeletePersonByIdAsync(Guid id);
     }
 
 
@@ -21,9 +23,19 @@ namespace Application.Service
 
         protected override string EndpointUri => "api/people/";
 
+        public async Task DeletePersonByIdAsync(Guid id)
+        {
+            await base.DeleteEntityByIdAsync(id);
+        }
+
         public async Task<IEnumerable<Person?>?> GetPeopleAsync()
         {
             return await base.GetAllAsync();
+        }
+
+        public async Task<Person?> GetPersonByIdAsync(Guid id)
+        {
+            return await base.GetEntityByIdAsync(id);
         }
     }
 }

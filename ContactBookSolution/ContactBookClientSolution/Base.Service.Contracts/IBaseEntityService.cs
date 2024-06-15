@@ -20,7 +20,8 @@
         /// <param name="endpoint">The endpoint on the API to load the resources</param>
         /// <returns></returns>
         Task<IEnumerable<TEntity?>> GetAllAsync();
-        
+        Task<TEntity?> GetEntityByIdAsync(Guid id);
+        Task DeleteEntityByIdAsync(Guid id);
 
     }
 }

@@ -16,9 +16,26 @@ namespace Base.Service
         {
         }
 
+        public async Task DeleteEntityByIdAsync(Guid id)
+        {
+           var sc = await _client.DeleteAsync(GetEndpointUrl() + id);
+           /* if (sc.IsSuccessStatusCode == false)
+            {
+                var message = await sc.Content.ReadAsStringAsync();
+                throw new Exception(message);
+            }*/
+            
+
+        }
+
         public async Task<IEnumerable<TEntity?>> GetAllAsync()
         {
             return await _client.GetFromJsonAsync<IEnumerable<TEntity?>?>(GetEndpointUrl());
+        }
+
+        public async Task<TEntity?> GetEntityByIdAsync(Guid id)
+        {
+            return await _client.GetFromJsonAsync<TEntity?>(GetEndpointUrl() + id);
         }
     }
 }

@@ -22,7 +22,7 @@ else
             @foreach (var p in People)
             {
                 <tr>
-                    <td>@p.FirstName</td>
+                    <td>@p!.FirstName</td>
                     <td>@p.LastName</td>
                     <td>
                         <a href=@($"/people/edit/{p.Id}")>Edit</a> |
