@@ -16,14 +16,20 @@ namespace Base.Service
         {
         }
 
+        public async Task<TEntity> CreateEntityAsync(TEntity entity)
+        {
+            var res = await _client.PostAsJsonAsync<TEntity>(GetEndpointUrl(), entity);
+            return await res.Content.ReadFromJsonAsync<TEntity>();
+        }
+
         public async Task DeleteEntityByIdAsync(Guid id)
         {
            var sc = await _client.DeleteAsync(GetEndpointUrl() + id);
-           /* if (sc.IsSuccessStatusCode == false)
+           if (sc.IsSuccessStatusCode == false)
             {
                 var message = await sc.Content.ReadAsStringAsync();
                 throw new Exception(message);
-            }*/
+            }
             
 
         }

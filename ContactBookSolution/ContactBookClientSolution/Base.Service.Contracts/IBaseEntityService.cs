@@ -22,6 +22,7 @@
         Task<IEnumerable<TEntity?>> GetAllAsync();
         Task<TEntity?> GetEntityByIdAsync(Guid id);
         Task DeleteEntityByIdAsync(Guid id);
+        Task<TEntity> CreateEntityAsync(TEntity entity);
 
     }
 }

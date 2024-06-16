@@ -11,6 +11,7 @@ namespace Application.Service
     {
         Task<IEnumerable<Person?>?>GetPeopleAsync();
         Task<Person?>GetPersonByIdAsync(Guid id);
+        Task<Person> CreatePerson(Person person);
         Task DeletePersonByIdAsync(Guid id);
     }
 
@@ -22,6 +23,11 @@ namespace Application.Service
         }
 
         protected override string EndpointUri => "api/people/";
+
+        public async Task<Person> CreatePerson(Person person)
+        {
+            return await base.CreateEntityAsync(person);
+        }
 
         public async Task DeletePersonByIdAsync(Guid id)
         {

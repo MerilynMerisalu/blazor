@@ -78,8 +78,13 @@ namespace WebApp.ApiControllers
         // POST: api/People
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(Person person)
+        public async Task<ActionResult<Person>> PostPerson(Person newperson)
         {
+            var person = new Person() {
+                Id = Guid.NewGuid(),
+                FirstName = newperson.FirstName,
+                LastName = newperson.LastName
+            };
             _context.People.Add(person);
             await _context.SaveChangesAsync();
 

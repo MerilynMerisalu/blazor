@@ -1,6 +1,34 @@
 ﻿@page "/people/create"
-<h3>Create</h3>
+@using Application.Domain.EF
+@using Application.Service
+@inject PersonService service
+@inject ISnackbar bar
+@inject NavigationManager nav
+@using Application.Domain
+
+<h1>Create Person</h1>
+<MudForm>
+    <MudTextField @bind-Value="FirstName" T="string" For="() => FirstName" Label="First Name"/>
+    <MudTextField @bind-Value="LastName" T="string" For="() => LastName" Label="Last Name" />
+</MudForm>
+<br />
+<div>
+    <MudButton OnClick="CreateAsync" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" Color="Color.Primary">Create</MudButton>
+</div>
 
 @code {
 
+    public string FirstName { get; set; } = default!;
+    public string LastName { get; set; } = default!;
+
+    public async void CreateAsync()
+    {
+        var person = new Person();
+        person.FirstName = FirstName;
+        person.LastName = LastName;
+
+        person = await service.CreatePerson(person);
+        bar.Add("Person Added", Severity.Success);
+        nav.NavigateTo("/people");
+    }
 }
