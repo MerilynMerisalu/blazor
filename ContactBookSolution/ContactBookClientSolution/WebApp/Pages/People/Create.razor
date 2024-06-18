@@ -16,12 +16,11 @@
     <ValidationSummary style="color:red"></ValidationSummary>
     <MudTextField @bind-Value="vm.FirstName" T="string" For="() => vm.FirstName" Label="First Name"/>
     <MudTextField @bind-Value="vm.LastName" T="string" For="() => vm.LastName" Label="Last Name" />
+    <br />
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" Color="Color.Primary">Create</MudButton>
 </EditForm>
-<br />
-<div>
-    
-</div>
+
+
 
 @code {
     CreateEditPersonViewModel vm = new CreateEditPersonViewModel();
