@@ -5,30 +5,36 @@
 @inject ISnackbar bar
 @inject NavigationManager nav
 @using Application.Domain
+@using WebApp.Validators
+@using WebApp.ViewModels
+@using Blazored.FluentValidation
+
 
 <h1>Create Person</h1>
-<MudForm>
-    <MudTextField @bind-Value="FirstName" T="string" For="() => FirstName" Label="First Name"/>
-    <MudTextField @bind-Value="LastName" T="string" For="() => LastName" Label="Last Name" />
-</MudForm>
+<EditForm Model="vm" OnValidSubmit="CreateAsync">
+     <FluentValidationValidator Validator="validations"/>
+    <ValidationSummary style="color:red"></ValidationSummary>
+    <MudTextField @bind-Value="vm.FirstName" T="string" For="() => vm.FirstName" Label="First Name"/>
+    <MudTextField @bind-Value="vm.LastName" T="string" For="() => vm.LastName" Label="Last Name" />
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" Color="Color.Primary">Create</MudButton>
+</EditForm>
 <br />
 <div>
-    <MudButton OnClick="CreateAsync" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" Color="Color.Primary">Create</MudButton>
+    
 </div>
 
 @code {
-
-    public string FirstName { get; set; } = default!;
-    public string LastName { get; set; } = default!;
+    CreateEditPersonViewModel vm = new CreateEditPersonViewModel();
+    PersonValidator validations = new PersonValidator();
 
     public async void CreateAsync()
     {
         var person = new Person();
-        person.FirstName = FirstName;
-        person.LastName = LastName;
+        person.FirstName = vm.FirstName;
+        person.LastName = vm.LastName;
 
         person = await service.CreatePerson(person);
-        bar.Add("Person Added", Severity.Success);
+        bar.Add("Person Added", MudBlazor.Severity.Success);
         nav.NavigateTo("/people");
     }
 }
