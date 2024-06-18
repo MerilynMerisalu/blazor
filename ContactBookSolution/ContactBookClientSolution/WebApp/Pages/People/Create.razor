@@ -11,7 +11,7 @@
 
 
 <h1>Create Person</h1>
-<EditForm Model="vm" OnValidSubmit="CreateAsync">
+<EditForm Model="vm" OnValidSubmit="Submit">
      <FluentValidationValidator Validator="validations"/>
     <ValidationSummary style="color:red"></ValidationSummary>
     <MudTextField @bind-Value="vm.FirstName" T="string" For="() => vm.FirstName" Label="First Name"/>
@@ -26,7 +26,7 @@
     CreateEditPersonViewModel vm = new CreateEditPersonViewModel();
     PersonValidator validations = new PersonValidator();
 
-    public async void CreateAsync()
+    public async void Submit()
     {
         var person = new Person();
         person.FirstName = vm.FirstName;
