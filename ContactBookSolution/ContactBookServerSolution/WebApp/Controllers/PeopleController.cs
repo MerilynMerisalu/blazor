@@ -54,7 +54,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedBy,DeletedAt,Id,IsDeleted")] Person person)
+        public async Task<IActionResult> Create(Person person)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("FirstName,LastName,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedBy,DeletedAt,Id,IsDeleted")] Person person)
+        public async Task<IActionResult> Edit(Guid id, Person person)
         {
             if (id != person.Id)
             {
@@ -98,7 +98,15 @@ namespace WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(person);
+                    var personDb = await _context.People.FindAsync(id);
+                    if (personDb == null)
+                    {
+                        return NotFound("no hacking");
+                    }
+                    personDb.FirstName = person.FirstName;
+                    personDb.LastName = person.LastName;
+                    personDb.UpdatedAt = DateTimeOffset.Now;
+                    _context.Update(personDb);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
