@@ -1,6 +1,7 @@
 ﻿@page "/people/details/{Id:guid}"
 @using Application.Domain.EF
 @using Application.Service
+@using WebApp.Pages.Shared
 @inject PersonService service
 <h1>Details</h1>
 @if(Person == null)
@@ -10,22 +11,8 @@
 else
 {
    
-    <h4>Person</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            First Name
-        </dt>
-        <dd class = "col-sm-10">
-            @Person.FirstName
-        </dd>
-        <dt class = "col-sm-2">
-            Last Name
-        </dt>
-        <dd class = "col-sm-10">
-            @Person.LastName
-        </dd>
-     </dl>
+    <DetailsDeletePerson FirstName=@Person.FirstName LastName=@Person.LastName/>
+    
      <div>
          <a href=@($"/people/edit/{Person.Id}")>Edit</a> |
         <a href=@("/people")>Back to List</a>
