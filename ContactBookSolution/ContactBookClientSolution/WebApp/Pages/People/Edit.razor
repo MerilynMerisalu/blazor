@@ -1,5 +1,7 @@
 ﻿@page "/people/edit/{Id:guid}"
 @inject PersonService service
+@inject ISnackbar bar
+@inject NavigationManager nav;
 @using Application.Domain.EF
 @using Application.Service
 @using WebApp.Validators
@@ -35,8 +37,11 @@
     }
     public async void Submit()
     {
-        var person = new Person();
         person.FirstName = vm.FirstName;
         person.LastName = vm.LastName;
-}
+        await service.UpdatePerson(Id,person);
+        bar.Add("Person Updated", MudBlazor.Severity.Success);
+        nav.NavigateTo("/people");
+
+    }
 }

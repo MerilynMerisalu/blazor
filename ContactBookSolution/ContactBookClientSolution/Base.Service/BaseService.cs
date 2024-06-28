@@ -43,6 +43,14 @@ namespace Base.Service
         {
             return await _client.GetFromJsonAsync<TEntity?>(GetEndpointUrl() + id);
         }
+
+        public async Task UpdateEntity(Guid id,TEntity entity )
+        {
+            await _client.PutAsJsonAsync<TEntity>(GetEndpointUrl() + id, entity);
+            
+        }
+
+        
     }
 }
 

@@ -103,6 +103,7 @@ namespace WebApp.Controllers
                     {
                         return NotFound("no hacking");
                     }
+                    personDb.Id = personDb.Id;
                     personDb.FirstName = person.FirstName;
                     personDb.LastName = person.LastName;
                     personDb.UpdatedAt = DateTimeOffset.Now;

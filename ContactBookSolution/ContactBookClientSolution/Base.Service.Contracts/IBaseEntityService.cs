@@ -1,4 +1,6 @@
-﻿namespace Base.Service.Contracts
+﻿using System.Threading.Tasks;
+
+namespace Base.Service.Contracts
 {
     public interface IBaseEntityService<TEntity, TKey> where TEntity : class
         where TKey : IEquatable<TKey>
@@ -23,6 +25,7 @@
         Task<TEntity?> GetEntityByIdAsync(Guid id);
         Task DeleteEntityByIdAsync(Guid id);
         Task<TEntity> CreateEntityAsync(TEntity entity);
+        Task UpdateEntity(Guid id,TEntity entity);
 
     }
 }

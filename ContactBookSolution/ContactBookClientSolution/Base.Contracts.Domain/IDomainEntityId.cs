@@ -5,6 +5,7 @@
     /// </summary>
     public interface IDomainEntityId : IDomainEntityId<Guid>
     {
+        
     }
 
     /// <summary>

@@ -12,6 +12,7 @@ namespace Application.Service
         Task<IEnumerable<Person?>?>GetPeopleAsync();
         Task<Person?>GetPersonByIdAsync(Guid id);
         Task<Person> CreatePerson(Person person);
+        Task UpdatePerson(Guid Id,Person person);
         Task DeletePersonByIdAsync(Guid id);
     }
 
@@ -42,6 +43,11 @@ namespace Application.Service
         public async Task<Person?> GetPersonByIdAsync(Guid id)
         {
             return await base.GetEntityByIdAsync(id);
+        }
+
+        public async Task UpdatePerson(Guid id,Person person)
+        {
+          await base.UpdateEntity(id,person);
         }
     }
 }
