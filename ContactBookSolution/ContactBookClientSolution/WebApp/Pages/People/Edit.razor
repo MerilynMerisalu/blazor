@@ -1,7 +1,42 @@
 ﻿@page "/people/edit/{Id:guid}"
+@inject PersonService service
+@using Application.Domain.EF
+@using Application.Service
+@using WebApp.Validators
+@using Blazored.FluentValidation
+@using WebApp.ViewModels
+
 <h3>Edit</h3>
+<EditForm Model="vm" OnValidSubmit="Submit">
+    <FluentValidationValidator Validator="validations" />
+    <ValidationSummary style="color:red"></ValidationSummary>
+    <MudTextField @bind-Value="vm.FirstName" T="string" For="() => vm.FirstName" Label="First Name" 
+         />
+    <MudTextField @bind-Value="vm.LastName" T="string" For="() => vm.LastName" Label="Last Name" />
+    <br />
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Primary">Edit</MudButton>
+</EditForm>
+
 
 @code {
     [Parameter]
     public Guid Id { get; set; }
+
+    PersonValidator validations = new PersonValidator();
+
+    CreateEditPersonViewModel vm = new();
+    Person person;
+
+    protected override async Task OnInitializedAsync()
+    {
+        person = await service.GetPersonByIdAsync(Id);
+        vm.FirstName = person.FirstName;
+        vm.LastName = person.LastName;
+    }
+    public async void Submit()
+    {
+        var person = new Person();
+        person.FirstName = vm.FirstName;
+        person.LastName = vm.LastName;
+}
 }

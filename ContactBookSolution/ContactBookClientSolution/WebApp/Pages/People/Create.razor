@@ -5,16 +5,19 @@
 @inject ISnackbar bar
 @inject NavigationManager nav
 @using Application.Domain
+
 @using WebApp.Validators
 @using WebApp.ViewModels
 @using Blazored.FluentValidation
 
 
 <h1>Create Person</h1>
+
+
 <EditForm Model="vm" OnValidSubmit="Submit">
-     <FluentValidationValidator Validator="validations"/>
+    <FluentValidationValidator Validator="validations" />
     <ValidationSummary style="color:red"></ValidationSummary>
-    <MudTextField @bind-Value="vm.FirstName" T="string" For="() => vm.FirstName" Label="First Name"/>
+    <MudTextField @bind-Value="vm.FirstName" T="string" For="() => vm.FirstName" Label="First Name" />
     <MudTextField @bind-Value="vm.LastName" T="string" For="() => vm.LastName" Label="Last Name" />
     <br />
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" Color="Color.Primary">Create</MudButton>
@@ -23,8 +26,8 @@
 
 
 @code {
-    CreateEditPersonViewModel vm = new CreateEditPersonViewModel();
-    PersonValidator validations = new PersonValidator();
+     CreateEditPersonViewModel vm = new CreateEditPersonViewModel();
+     PersonValidator validations = new PersonValidator();
 
     public async void Submit()
     {
@@ -35,5 +38,5 @@
         person = await service.CreatePerson(person);
         bar.Add("Person Added", MudBlazor.Severity.Success);
         nav.NavigateTo("/people");
-    }
+     }
 }
