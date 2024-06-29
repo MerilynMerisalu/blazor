@@ -10,11 +10,11 @@
 }
 else
 {
-    <_DetailsDeletePerson FirstName=@Person.FirstName LastName=@Person.LastName/>
+    <_DetailsDeletePerson Person="Person"/>
     
      <div>
-         <a href=@($"/people/edit/{Person.Id}")>Edit</a> |
-        <a href=@("/people")>Back to List</a>
+         <MudLink Color="Color.Dark" Href="@($"/people/edit/{Person.Id}")">Edit</MudLink> |
+        <MudLink Color="Color.Dark" Href=@("/people")>Back to List</MudLink>
      </div>
 }
 @code {

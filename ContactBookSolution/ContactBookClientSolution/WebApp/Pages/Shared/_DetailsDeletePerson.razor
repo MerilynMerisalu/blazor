@@ -1,7 +1,20 @@
-﻿
-<h4>Person</h4>
+﻿@using Application.Domain.EF
+
+<MudText Typo="Typo.h4">Person</MudText>
 <hr />
-<dl class="row">
+<MudSimpleTable Style="overflow:auto; border:none">
+    <tr>
+        <MudTh Style="font-weight:bold">First Name</MudTh>
+        <MudTd>@Person!.FirstName</MudTd>
+    </tr>
+    <tr>
+        <MudTh Style="font-weight:bold">Last Name</MudTh>
+        <MudTd>@Person!.LastName</MudTd>
+    </tr>
+</MudSimpleTable>
+
+
+@* <dl class="row">
     <dt class="col-sm-2">
         First Name
     </dt>
@@ -14,12 +27,14 @@
     <dd class="col-sm-10">
         @LastName
     </dd>
-</dl>
+</dl> *@
 
 @code {
-   [Parameter]
-   public string? FirstName { get; set; }
-
     [Parameter]
-    public string? LastName { get; set; }
+    public Person? Person { get; set; }
+   // [Parameter]
+   // public string? FirstName { get; set; }
+
+   //  [Parameter]
+   //  public string? LastName { get; set; }
 }
