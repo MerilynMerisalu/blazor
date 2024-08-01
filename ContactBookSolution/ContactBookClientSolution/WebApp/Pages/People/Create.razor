@@ -9,17 +9,12 @@
 @using WebApp.Validators
 @using WebApp.ViewModels
 @using Blazored.FluentValidation
-
+@using WebApp.Pages.Shared
 
 <h1>Create Person</h1>
 
-
 <EditForm Model="vm" OnValidSubmit="Submit">
-    <FluentValidationValidator Validator="validations" />
-    <ValidationSummary style="color:red"></ValidationSummary>
-    <MudTextField @bind-Value="vm.FirstName" T="string" For="() => vm.FirstName" Label="First Name" />
-    <MudTextField @bind-Value="vm.LastName" T="string" For="() => vm.LastName" Label="Last Name" />
-    <br />
+    <_CreateEditPerson ViewModel="vm" Validator="validations" />
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" Color="Color.Primary">Create</MudButton>
 </EditForm>
 

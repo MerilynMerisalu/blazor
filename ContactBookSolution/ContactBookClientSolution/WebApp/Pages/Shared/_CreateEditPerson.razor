@@ -1,3 +1,19 @@
-﻿
+﻿@using Blazored.FluentValidation
+@using WebApp.Validators
+@using WebApp.ViewModels
 
+
+<FluentValidationValidator Validator="Validator" />
+<ValidationSummary style="color:red"></ValidationSummary>
+<MudTextField @bind-Value="ViewModel.FirstName" T="string" For="() => ViewModel.FirstName" Label="First Name" />
+<MudTextField @bind-Value="ViewModel.LastName" T="string" For="() => ViewModel.LastName" Label="Last Name" />
+<br />
+
+@code {
+    [Parameter, EditorRequired]
+    public CreateEditPersonViewModel ViewModel { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public PersonValidator Validator { get; set; } = null!;
+}
 
